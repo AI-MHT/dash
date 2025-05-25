@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, Calendar, ChevronDown, Download, Filter, UserRound, Beaker, Flask, Droplet } from 'lucide-react';
+import { AlertTriangle, Calendar, ChevronDown, Download, Filter, UserRound, Beaker, FlaskRound as Flask, Droplet } from 'lucide-react';
 import { DateRange, Shift, ShiftReportFilters } from '../types';
 import { formatDate, getUniqueResponsibles } from '../utils/data';
 
