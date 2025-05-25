@@ -1,5 +1,5 @@
 import React from 'react';
-import { Beaker, Droplet, FlaskRound as Flask, Thermometer } from 'lucide-react';
+import { TestTube2, Flask, Thermometer, Droplet } from 'lucide-react';
 import { ConsumptionData } from '../types';
 
 interface ConsumptionCardProps {
@@ -22,7 +22,7 @@ const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ consumptionData }) =>
         <div className="bg-gradient-to-br from-primary-900/40 to-primary-800/20 rounded-lg p-4 border border-gray-700/20">
           <div className="flex justify-between items-start mb-2">
             <h3 className="text-sm font-medium text-gray-300">Ester</h3>
-            <Beaker className="w-5 h-5 text-primary-400" />
+            <TestTube2 className="w-5 h-5 text-primary-400" />
           </div>
           <div className="flex items-baseline gap-1">
             <span className="text-xl font-bold animate-count-up">{formatNumber(ester)}</span>

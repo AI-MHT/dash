@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, Gauge, Zap, AlertTriangle, UserCircle, FlaskConical } from 'lucide-react';
+import { Clock, Gauge, Zap, AlertTriangle, UserCircle, FlaskConical, Timer, Scale, Activity, Repeat, Factory, TimerOff, TestTube2, Flask, Thermometer, Droplet, Package } from 'lucide-react';
 import { Shift } from '../types';
 import { formatDate, formatShiftIdentifier } from '../utils/data';
 
@@ -13,7 +13,7 @@ const ShiftDetail: React.FC<ShiftDetailProps> = ({ shift, onClose }) => {
   
   return (
     <div className="fixed inset-0 bg-dark-400/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-dark-200 to-dark-300 rounded-xl border border-gray-700/40 shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-auto">
+      <div className="bg-gradient-to-br from-dark-200 to-dark-300 rounded-xl border border-gray-700/40 shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-auto">
         <div className="p-6">
           <div className="flex justify-between items-start mb-6">
             <div>
@@ -32,45 +32,63 @@ const ShiftDetail: React.FC<ShiftDetailProps> = ({ shift, onClose }) => {
             </button>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
               <div className="flex items-center gap-2 mb-2 text-primary-400">
-                <FlaskConical className="w-5 h-5" />
-                <span className="text-sm font-medium">Production</span>
+                <Timer className="w-5 h-5" />
+                <span className="text-sm font-medium">Operating Hours</span>
+              </div>
+              <p className="text-xl font-bold">{shift.operatingHours.toFixed(1)} Hr</p>
+            </div>
+            
+            <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
+              <div className="flex items-center gap-2 mb-2 text-secondary-400">
+                <Scale className="w-5 h-5" />
+                <span className="text-sm font-medium">Final Product</span>
               </div>
               <p className="text-xl font-bold">{shift.finalProductTonnes.toFixed(1)} T</p>
             </div>
             
             <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
-              <div className="flex items-center gap-2 mb-2 text-secondary-400">
-                <Zap className="w-5 h-5" />
-                <span className="text-sm font-medium">Efficiency</span>
-              </div>
-              <p className="text-xl font-bold">{shift.efficiency.toFixed(1)}%</p>
-            </div>
-            
-            <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
-              <div className="flex items-center gap-2 mb-2 text-warning-400">
-                <Clock className="w-5 h-5" />
-                <span className="text-sm font-medium">Downtime</span>
-              </div>
-              <p className="text-xl font-bold">{shift.downtime} min</p>
-            </div>
-            
-            <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
               <div className="flex items-center gap-2 mb-2 text-accent-400">
-                <Gauge className="w-5 h-5" />
-                <span className="text-sm font-medium">Quality Rate</span>
+                <Activity className="w-5 h-5" />
+                <span className="text-sm font-medium">Max Flow Rate</span>
               </div>
-              <p className="text-xl font-bold">{shift.qualityRate.toFixed(1)}%</p>
+              <p className="text-xl font-bold">{shift.maxFlowRate.toFixed(1)} T/Hr</p>
             </div>
             
             <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
               <div className="flex items-center gap-2 mb-2 text-error-400">
-                <AlertTriangle className="w-5 h-5" />
-                <span className="text-sm font-medium">Stops</span>
+                <Repeat className="w-5 h-5" />
+                <span className="text-sm font-medium">Stop Frequency</span>
               </div>
               <p className="text-xl font-bold">{shift.stopsFrequency}</p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
+              <div className="flex items-center gap-2 mb-2 text-primary-400">
+                <Factory className="w-5 h-5" />
+                <span className="text-sm font-medium">ORE Flowrate</span>
+              </div>
+              <p className="text-xl font-bold">{shift.oreFlowrate?.toFixed(1) || 0} T</p>
+            </div>
+            
+            <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
+              <div className="flex items-center gap-2 mb-2 text-warning-400">
+                <TimerOff className="w-5 h-5" />
+                <span className="text-sm font-medium">Startup Time</span>
+              </div>
+              <p className="text-xl font-bold">{shift.startupTime?.toFixed(1) || 0} Hr</p>
+            </div>
+            
+            <div className="bg-dark-300/70 p-4 rounded-lg border border-gray-700/30">
+              <div className="flex items-center gap-2 mb-2 text-success-400">
+                <Package className="w-5 h-5" />
+                <span className="text-sm font-medium">Received Phosphate</span>
+              </div>
+              <p className="text-xl font-bold">{shift.receivedPhosphate?.toFixed(1) || 0} T</p>
             </div>
             
             {shift.responsible && (
@@ -84,69 +102,42 @@ const ShiftDetail: React.FC<ShiftDetailProps> = ({ shift, onClose }) => {
             )}
           </div>
           
-          {shift.oreFlowrate && (
-            <div className="mb-6">
-              <h3 className="text-lg font-medium mb-3">Flow & Operating Metrics</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div className="bg-dark-300/50 p-3 rounded-lg">
-                  <p className="text-xs text-gray-400 mb-1">Operating Hours</p>
-                  <p className="font-medium">{shift.operatingHours.toFixed(2)} hrs</p>
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3">Chemical Consumption</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-dark-300/50 p-4 rounded-lg border border-gray-700/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <TestTube2 className="w-5 h-5 text-primary-400" />
+                  <span className="text-sm font-medium">Ester</span>
                 </div>
-                
-                <div className="bg-dark-300/50 p-3 rounded-lg">
-                  <p className="text-xs text-gray-400 mb-1">Max Flow Rate</p>
-                  <p className="font-medium">{shift.maxFlowRate.toFixed(1)} T/Hr</p>
+                <p className="text-xl font-bold">{shift.esterConsumption?.toFixed(1) || 0} L</p>
+              </div>
+              
+              <div className="bg-dark-300/50 p-4 rounded-lg border border-gray-700/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <Flask className="w-5 h-5 text-secondary-400" />
+                  <span className="text-sm font-medium">Amin</span>
                 </div>
-                
-                <div className="bg-dark-300/50 p-3 rounded-lg">
-                  <p className="text-xs text-gray-400 mb-1">ORE Flowrate</p>
-                  <p className="font-medium">{shift.oreFlowrate.toFixed(1)} T</p>
+                <p className="text-xl font-bold">{shift.aminConsumption?.toFixed(1) || 0} L</p>
+              </div>
+              
+              <div className="bg-dark-300/50 p-4 rounded-lg border border-gray-700/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <Thermometer className="w-5 h-5 text-accent-400" />
+                  <span className="text-sm font-medium">Acid</span>
                 </div>
-                
-                {shift.startupTime && shift.startupTime > 0 && (
-                  <div className="bg-dark-300/50 p-3 rounded-lg">
-                    <p className="text-xs text-gray-400 mb-1">Startup Time</p>
-                    <p className="font-medium">{shift.startupTime.toFixed(1)} hrs</p>
-                  </div>
-                )}
+                <p className="text-xl font-bold">{shift.acidConsumption?.toFixed(1) || 0} L</p>
+              </div>
+              
+              <div className="bg-dark-300/50 p-4 rounded-lg border border-gray-700/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <Droplet className="w-5 h-5 text-success-400" />
+                  <span className="text-sm font-medium">Floculant</span>
+                </div>
+                <p className="text-xl font-bold">{shift.floculantConsumption?.toFixed(1) || 0} m³</p>
               </div>
             </div>
-          )}
-          
-          {(shift.esterConsumption || shift.aminConsumption || shift.acidConsumption || shift.floculantConsumption) && (
-            <div className="mb-6">
-              <h3 className="text-lg font-medium mb-3">Consumption</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {shift.esterConsumption !== undefined && (
-                  <div className="bg-dark-300/50 p-3 rounded-lg">
-                    <p className="text-xs text-gray-400 mb-1">Ester</p>
-                    <p className="font-medium">{shift.esterConsumption.toFixed(1)} L</p>
-                  </div>
-                )}
-                
-                {shift.aminConsumption !== undefined && (
-                  <div className="bg-dark-300/50 p-3 rounded-lg">
-                    <p className="text-xs text-gray-400 mb-1">Amin</p>
-                    <p className="font-medium">{shift.aminConsumption.toFixed(1)} L</p>
-                  </div>
-                )}
-                
-                {shift.acidConsumption !== undefined && (
-                  <div className="bg-dark-300/50 p-3 rounded-lg">
-                    <p className="text-xs text-gray-400 mb-1">Acid</p>
-                    <p className="font-medium">{shift.acidConsumption.toFixed(1)} L</p>
-                  </div>
-                )}
-                
-                {shift.floculantConsumption !== undefined && (
-                  <div className="bg-dark-300/50 p-3 rounded-lg">
-                    <p className="text-xs text-gray-400 mb-1">Floculant</p>
-                    <p className="font-medium">{shift.floculantConsumption.toFixed(1)} m³</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+          </div>
           
           {shift.notes && (
             <div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, Calendar, ChevronDown, Download, Factory, Filter, UserRound } from 'lucide-react';
+import { AlertTriangle, Calendar, ChevronDown, Download, Filter, UserRound, Beaker, Flask, Droplet } from 'lucide-react';
 import { DateRange, Shift, ShiftReportFilters } from '../types';
 import { formatDate, getUniqueResponsibles } from '../utils/data';
 
@@ -65,13 +65,19 @@ const Header: React.FC<HeaderProps> = ({
       <div className="card-gradient mb-6 p-4 md:p-6 rounded-xl border border-gray-700/30 shadow-lg">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <div className="flex items-center gap-2">
-              <Factory className="w-6 h-6 text-primary-500" />
-              <h1 className="text-xl md:text-2xl font-bold text-white">Shift Report</h1>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-2">
+                <Beaker className="w-8 h-8 text-primary-500" />
+                <Flask className="w-8 h-8 text-secondary-500" />
+                <Droplet className="w-8 h-8 text-accent-500" />
+              </div>
+              <div>
+                <h1 className="text-xl md:text-2xl font-bold text-white">Shift Report</h1>
+                <p className="text-gray-400 text-sm mt-1">
+                  {formatDate(filters.dateRange.startDate)} - {formatDate(filters.dateRange.endDate)}
+                </p>
+              </div>
             </div>
-            <p className="text-gray-400 text-sm mt-1">
-              {formatDate(filters.dateRange.startDate)} - {formatDate(filters.dateRange.endDate)}
-            </p>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
