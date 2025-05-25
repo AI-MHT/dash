@@ -1,5 +1,5 @@
 import React from 'react';
-import { TestTube2, Flask, Thermometer, Droplet } from 'lucide-react';
+import { TestTube2, FlaskRound as Flask, Thermometer, Droplet } from 'lucide-react';
 import { ConsumptionData } from '../types';
 
 interface ConsumptionCardProps {

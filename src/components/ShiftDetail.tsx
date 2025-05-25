@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, Gauge, Zap, AlertTriangle, UserCircle, FlaskConical, Timer, Scale, Activity, Repeat, Factory, TimerOff, TestTube2, Flask, Thermometer, Droplet, Package } from 'lucide-react';
+import { Clock, Gauge, Zap, AlertTriangle, UserCircle, FlaskConical, Timer, Scale, Activity, Repeat, Factory, TimerOff, TestTube2, FlaskRound as Flask, Thermometer, Droplet, Package } from 'lucide-react';
 import { Shift } from '../types';
 import { formatDate, formatShiftIdentifier } from '../utils/data';
 
