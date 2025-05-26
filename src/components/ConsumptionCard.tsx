@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flask, Droplet, Beaker, Waves } from 'lucide-react';
+import { FlaskRound as Flask, Droplet, Beaker, Waves } from 'lucide-react';
 import { ConsumptionData } from '../types';
 
 interface ConsumptionCardProps {
